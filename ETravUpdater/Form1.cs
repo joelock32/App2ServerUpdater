@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Reflection;
 
 
 namespace ETravUpdater
@@ -39,6 +40,8 @@ namespace ETravUpdater
                     Console.Write("Major:{0}, Minor:{1}", v.Major, v.Minor);
                 }
                 databaseFilePut(xfile);
+
+
             }
             Console.WriteLine(result); // <-- For debugging use.
         }
@@ -56,7 +59,7 @@ namespace ETravUpdater
             using (SqlConnection SqlConn = new SqlConnection(ConnStr))
             using (SqlCommand command = SqlConn.CreateCommand())
             {
-                command.CommandText = "UPDATE tblapplications SET Application=@binapp, SET Version=@versioninfo FileDate=getdate() ";
+                command.CommandText = "UPDATE tblapplications SET Application=@binapp, Version=@versioninfo, DefaultLocation='All Locations', FileDate=getdate(), Applicationame= '" + FileNameof + "'";
                 command.Parameters.AddWithValue("@binapp", file);
                 command.Parameters.AddWithValue("@versioninfo", versioninfo);
 
