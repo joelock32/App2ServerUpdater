@@ -12,7 +12,16 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using DevExpress.XtraBars.Customization.Helpers;
+using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using DevExpress.Utils.Drawing;
 using DevExpress.XtraEditors;
+
 
 namespace ETravUpdater
 {
@@ -27,13 +36,15 @@ namespace ETravUpdater
         public string id;
         string version;
         string Locations = "Default Location";
-        bool updateRequest = false;
-        private bool dllbtn;
-        private bool frf3btn;
-        private bool inibtn;
-        private bool xmlbtn;
+        bool updateRequestNew = false;
+        bool updateRequestOld = false;
         SimpleButton currentEditor;
-        private bool frfbtn;
+        public bool dllbtn { get; private set; }
+        public bool frf3btn { get; private set; }
+        public bool inibtn { get; private set; }
+        public bool xmlbtn { get; private set; }
+        public int ProductBuildPart { get; }
+        public bool frfbtn { get; private set; }
 
         public bool exebtn { get; private set; }
 
@@ -54,13 +65,14 @@ namespace ETravUpdater
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            if (checkButton1.Checked)
-            {
-                simpleButton1.Appearance.BackColor = Color.LightGreen;
-                simpleButton1.Appearance.BackColor2 = Color.DarkGreen;
-                timer1.Start();
+            timer1.Stop();
+            //if (checkButton1.Checked)
+            //{
+              //  simpleButton1.Appearance.BackColor = Color.LightBlue;
+                //simpleButton1.Appearance.BackColor2 = Color.DarkBlue;
+                
 
-            }
+            //}
            
             DialogResult result = openFileDialog1.ShowDialog();
             if (result == DialogResult.OK) // Test result.
@@ -68,42 +80,123 @@ namespace ETravUpdater
                 xfile = openFileDialog1.FileName;
                 FileNameof = Path.GetFileName(xfile);
                 fn = Path.GetFileNameWithoutExtension(xfile);
+
+                //Test if valid assembly file(.exe or dll)
                 if (exebtn == true || dllbtn == true)
                 {
                     try
                     {
                         System.Reflection.AssemblyName testAssembly =
-                System.Reflection.AssemblyName.GetAssemblyName(@xfile);
+                        System.Reflection.AssemblyName.GetAssemblyName(xfile);
+                        var assembly = a = Assembly.LoadFile(xfile);  //typeof(Program).Assembly;
+                        var attribute = (GuidAttribute)assembly.GetCustomAttributes(typeof(GuidAttribute), true)[0];
+                        id = attribute.Value;
+                        FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+                        version = fvi.FileVersion;
+                        versioninfo = fvi.FileVersion.Split('_');
+                        Version v;
+                        if (versioninfo.Length > 1 && Version.TryParse(versioninfo.Last(), out v))
+                        {
+                            Console.Write("Major:{0}, Minor:{1}", v.Major, v.Minor);
+                        }
+                        databaseFileRead(id, version);
+
+                        if (updateRequestNew == true || updateRequestOld == true)
+                        {
+                            timer1.Start();
+                            databaseFileupdate(xfile, version);
+                        }
+                        if (updateRequestNew != true || updateRequestOld != true)
+                        {
+                            timer1.Start();
+                            databaseFilePut(xfile);
+                        }
+
                     }
-                    catch(System.BadImageFormatException)
+                    catch (System.IO.FileNotFoundException)
+                    {
+                        System.Console.WriteLine("The file cannot be found.");
+                        MessageBox.Show("The file cannot be found.");
+                        timer1.Stop();
+                        return;
+                    }
+                    catch (System.IO.FileLoadException)
+                    {
+                        System.Console.WriteLine("The assembly has already been loaded.");
+                        MessageBox.Show("The assembly has already been loaded.");
+                        timer1.Stop();
+                        return;
+                    }
+                    catch (System.BadImageFormatException)
                     {
                         System.Console.WriteLine("The file is not an assembly.");
                         MessageBox.Show("The file selected is not an exe or dll");
+                        timer1.Stop();
                         return;
                     }
-                        
+
+                 
+
+
                }
+                //Test if valid non-assembly file(frf,frf3,ini or xml)
+                if (frfbtn == true || frf3btn == true || inibtn == true || xmlbtn == true)
+                {
+                    try
+                    {
+                        System.Reflection.AssemblyName testAssembly =
+                        System.Reflection.AssemblyName.GetAssemblyName(xfile);
+                        System.Console.WriteLine("The files an active application, Try selecting .EXE");
+                        MessageBox.Show("The files an active application, Try selecting .EXE");
+                        timer1.Stop();
+                        return;
+                    }
+                    catch (System.IO.FileNotFoundException)
+                    {
+                        System.Console.WriteLine("The file cannot be found.");
+                        MessageBox.Show("The file cannot be found.");
+                        timer1.Stop();
+                        return;
+                    }
+                    catch (System.IO.FileLoadException)
+                    {
+                        System.Console.WriteLine("The assembly has already been loaded.");
+                        MessageBox.Show("The assembly has already been loaded.");
+                        timer1.Stop();
+                        return;
+                    }
+                    catch (System.BadImageFormatException)
+                    {
+                        System.Console.WriteLine("The file is not an assembly.");
+                        //prepare file 
+                        try
+                        {
+                            FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo(Environment.SystemDirectory + xfile);
+                            version = myFileVersionInfo.FileVersion;
+                            id = myFileVersionInfo.ProductBuildPart.ToString();
+                            databaseFileRead(id, version);
+                            if (updateRequestNew == true || updateRequestOld == true)
+                            {
+                                timer1.Start();
+                                databaseFileupdate(xfile, version);
+                            }
+                            if (updateRequestNew != true || updateRequestOld != true)
+                            {
+                                timer1.Start();
+                                version = "0000";
+                                databaseFilePut(xfile);
+                            }
+                            return;
+                        }
+                        catch (NotSupportedException)
+                        {
+                            timer1.Start();
+                            version = "0000";
+                            databaseFilePut(xfile);
+                        }
+                    }
+                    
 
-                var assembly = a = Assembly.LoadFile(xfile);  //typeof(Program).Assembly;
-                var attribute = (GuidAttribute)assembly.GetCustomAttributes(typeof(GuidAttribute), true)[0];
-                id = attribute.Value;
-                FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-                version = fvi.FileVersion;
-                versioninfo = fvi.FileVersion.Split('_');
-                Version v;
-                if (versioninfo.Length > 1 && Version.TryParse(versioninfo.Last(), out v))
-                {
-                    Console.Write("Major:{0}, Minor:{1}", v.Major, v.Minor);
-                }
-                databaseFileRead(id, version);
-
-                if (updateRequest == true)
-                {
-                    databaseFileupdate(xfile, version);
-                }
-                if (updateRequest != true)
-                {
-                    databaseFilePut(xfile);
                 }
 
             }
@@ -123,11 +216,12 @@ namespace ETravUpdater
             using (SqlConnection SqlConn = new SqlConnection(ConnStr))
             using (SqlCommand command = SqlConn.CreateCommand())
             {
+                if (version == null) { version = "getdate()"; }
                 command.CommandText = "INSERT INTO tblVSapplications (VSApplication, FileVersion, DefaultLocation, FileDate, Applicationguid, Applicationname) VALUES (@binapp, @versioninfo, " + "'" + Locations + "'" + ",getdate()," + "'" + id + "'," + "'" + FileNameof + "')";
                 //command.CommandText = "UPDATE tblVSapplications SET VSApplication=@binapp, FileVersion=@versioninfo, DefaultLocation= " + "'" + Locations + "'" + ",FileDate=getdate(), Applicationguid=" + "'" + id + "'" + ",Applicationname=" + "'" + FileNameof + "'";
                 command.Parameters.AddWithValue("@binapp", file);
                 command.Parameters.AddWithValue("@versioninfo", version);
-
+                
                 SqlConn.Open();
 
                 command.ExecuteNonQuery();
@@ -145,6 +239,7 @@ namespace ETravUpdater
 
         public void databaseFileupdate(string varFilePath,string version) //Updates any file on server!
         {
+            if(varFilePath == null) { return; }
             byte[] file;
             using (var stream = new FileStream(varFilePath, FileMode.Open, FileAccess.Read))
             {
@@ -179,27 +274,48 @@ namespace ETravUpdater
         public void databaseFileRead(string varID, string version) //Just reads file on server for comparison
         {
             using (SqlConnection SqlConn = new SqlConnection(ConnStr))
-            using (SqlCommand command = SqlConn.CreateCommand())
+            using (SqlCommand cmd = new SqlCommand("SELECT VSApplication FROM tblVSapplications WHERE FileVersion=@version", SqlConn))
             {
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.AddWithValue("@version", version);
                 SqlConn.Open();
-                //varPathToNewLocation = xfile;
-                command.Parameters.AddWithValue("@varID", varID);
-                command.CommandText = "SELECT VSApplication FROM tblVSapplications WHERE Applicationguid='"+ varID + "'";
-                using (var sqlQueryResult = command.ExecuteReader())
-                    if (sqlQueryResult != null)
-                    {
-                        //sqlQueryResult.Read();
-                       // var blob = new Byte[(sqlQueryResult.GetBytes(0, 0, null, 0, int.MaxValue))];
-                       // sqlQueryResult.GetBytes(0, 0, blob, 0, blob.Length);
-                       // using (var fs = new FileStream(varPathToNewLocation, FileMode.Create, FileAccess.Write))
-                            //fs.Write(blob, 0, blob.Length);
-                        updateRequest = true;
-                    }
+                object o = cmd.ExecuteScalar();
+                if (o != null)
+                {
+                    string f = o.ToString();
+                    updateRequestNew = true;
+                }
+                else
+                {
+                    updateRequestNew = false;
+                }
+
+                SqlConn.Close();
+            }
+
+            //Old database
+            using (SqlConnection SqlConn = new SqlConnection(ConnStr))
+            using (SqlCommand cmd = new SqlCommand("SELECT Application FROM tblapplications WHERE Version=@version", SqlConn))
+            {
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.AddWithValue("@version", version);
+                SqlConn.Open();
+                object o = cmd.ExecuteScalar();
+                if (o != null)
+                {
+                    string f = o.ToString();
+                    updateRequestOld = true;
+                }
+                else
+                {
+                    updateRequestOld = false;
+                }
+
                 SqlConn.Close();
             }
         }
 
-        public MemoryStream databaseFileRead(string varID)
+        public MemoryStream databaseFileRead(string varID) //Use to move one set of data from a database to another database.
         {
             MemoryStream memoryStream = new MemoryStream();
             using (SqlConnection SqlConn = new SqlConnection(ConnStr))
@@ -257,10 +373,7 @@ namespace ETravUpdater
 
         }
 
-        private void gridControl2_Click(object sender, EventArgs e)
-        {
-
-        }
+       
 
         private void simpleButton3_Click(object sender, EventArgs e)
         {
@@ -280,6 +393,11 @@ namespace ETravUpdater
             {
                 checkButton1.Appearance.BackColor = Color.LightGreen;
                 checkButton1.Appearance.BackColor2 = Color.DarkGreen;
+                checkButton2.Checked=false;
+                checkButton3.Checked = false;
+                checkButton4.Checked = false;
+                checkButton5.Checked = false;
+                checkButton6.Checked = false;
                 exebtn = true;
             }
             else
@@ -295,6 +413,11 @@ namespace ETravUpdater
             {
                 checkButton2.Appearance.BackColor = Color.LightGreen;
                 checkButton2.Appearance.BackColor2 = Color.DarkGreen;
+                checkButton1.Checked = false;
+                checkButton3.Checked = false;
+                checkButton4.Checked = false;
+                checkButton5.Checked = false;
+                checkButton6.Checked = false;
                 dllbtn = true;
             }
             else
@@ -310,6 +433,11 @@ namespace ETravUpdater
             {
                 checkButton3.Appearance.BackColor = Color.LightGreen;
                 checkButton3.Appearance.BackColor2 = Color.DarkGreen;
+                checkButton2.Checked = false;
+                checkButton1.Checked = false;
+                checkButton4.Checked = false;
+                checkButton5.Checked = false;
+                checkButton6.Checked = false;
                 frfbtn = true;
             }
             else
@@ -325,6 +453,11 @@ namespace ETravUpdater
             {
                 checkButton4.Appearance.BackColor = Color.LightGreen;
                 checkButton4.Appearance.BackColor2 = Color.DarkGreen;
+                checkButton2.Checked = false;
+                checkButton3.Checked = false;
+                checkButton1.Checked = false;
+                checkButton5.Checked = false;
+                checkButton6.Checked = false;
                 frf3btn = true;
             }
             else
@@ -340,6 +473,11 @@ namespace ETravUpdater
             {
                 checkButton5.Appearance.BackColor = Color.LightGreen;
                 checkButton5.Appearance.BackColor2 = Color.DarkGreen;
+                checkButton2.Checked = false;
+                checkButton3.Checked = false;
+                checkButton4.Checked = false;
+                checkButton1.Checked = false;
+                checkButton6.Checked = false;
                 inibtn = true;
             }
             else
@@ -355,6 +493,11 @@ namespace ETravUpdater
             {
                 checkButton6.Appearance.BackColor = Color.LightGreen;
                 checkButton6.Appearance.BackColor2 = Color.DarkGreen;
+                checkButton2.Checked = false;
+                checkButton3.Checked = false;
+                checkButton4.Checked = false;
+                checkButton5.Checked = false;
+                checkButton1.Checked = false;
                 xmlbtn = true;
             }
             else
@@ -375,13 +518,13 @@ namespace ETravUpdater
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (simpleButton1.Appearance.BackColor == Color.Red)
+            if (simpleButton1.Appearance.BackColor == Color.DarkBlue)
             {
-                SetControlBackColor(Color.Blue);
+                SetControlBackColor(Color.LightBlue);
             }
             else
             {
-                SetControlBackColor(Color.Red);
+                SetControlBackColor(Color.DarkBlue);
             }
         }
 
@@ -389,5 +532,39 @@ namespace ETravUpdater
         {
             databaseFileupdate(xfile, version);
         }
+
+        private void simpleButton4_Click(object sender, EventArgs e)
+        {
+            if (txtAppdelete.Text == "")
+            {
+                MessageBox.Show("please Select or type in application name along with its version in the File Version box");
+                return;
+            }
+            if (txtFileVerDeleete.Text == "")
+            {
+                MessageBox.Show("please Select or type in application name along with its version in the File Version box");
+                return;
+            }
+            string a = txtAppdelete.Text.ToString();
+            string b = txtFileVerDeleete.Text.ToString();
+            SqlConnection SqlConn = new SqlConnection(ConnStr);
+            SqlConn.Open();
+            string sql = "DELETE FROM tblapplications WHERE ApplicationName=" + "'" + a + "'" + "and Version=" + "'" + b + "'" ;
+            SqlCommand cmd = new SqlCommand(sql, SqlConn);
+            string sql2 = "DELETE FROM tblVSapplications WHERE ApplicationName=" + "'" + a + "'" + "and FileVersion=" + "'" + b + "'" ;
+            SqlCommand cmd2 = new SqlCommand(sql2, SqlConn);
+            cmd.ExecuteNonQuery();
+            cmd2.ExecuteNonQuery();
+            SqlConn.Close();
+
+
+        }
+
+       private void gridControl1_Click(object sender, EventArgs e)
+        {
+ 
+        }
+
+        
     }
 }

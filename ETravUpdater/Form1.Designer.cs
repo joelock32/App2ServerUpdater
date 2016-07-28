@@ -50,9 +50,21 @@
             this.colApplicationID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colVersion = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
             this.dropDownButton2 = new DevExpress.XtraEditors.DropDownButton();
+            this.popupMenu2 = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
+            this.barEditItem1 = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemDateEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
+            this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.repositoryItemTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
+            this.repositoryItemTextEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.dropDownButton1 = new DevExpress.XtraEditors.DropDownButton();
+            this.popupMenu1 = new DevExpress.XtraBars.PopupMenu(this.components);
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.checkButton6 = new DevExpress.XtraEditors.CheckButton();
             this.checkButton5 = new DevExpress.XtraEditors.CheckButton();
@@ -73,6 +85,11 @@
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.panelControl4 = new DevExpress.XtraEditors.PanelControl();
+            this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
+            this.txtFileVerDeleete = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
+            this.txtAppdelete = new DevExpress.XtraEditors.TextEdit();
+            this.simpleButton4 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -81,6 +98,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenu2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
@@ -89,6 +113,8 @@
             this.panelControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).BeginInit();
             this.panelControl4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFileVerDeleete.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAppdelete.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gridView2
@@ -112,6 +138,7 @@
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1,
             this.gridView2});
+            this.gridControl1.Click += new System.EventHandler(this.gridControl1_Click);
             // 
             // sqlDataSource1
             // 
@@ -192,6 +219,7 @@
             // 
             // panelControl1
             // 
+            this.panelControl1.Controls.Add(this.labelControl5);
             this.panelControl1.Controls.Add(this.dropDownButton2);
             this.panelControl1.Controls.Add(this.simpleButton2);
             this.panelControl1.Controls.Add(this.dropDownButton1);
@@ -207,22 +235,117 @@
             this.panelControl1.Size = new System.Drawing.Size(428, 183);
             this.panelControl1.TabIndex = 0;
             // 
+            // labelControl5
+            // 
+            this.labelControl5.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Horizontal;
+            this.labelControl5.LineVisible = true;
+            this.labelControl5.Location = new System.Drawing.Point(5, 97);
+            this.labelControl5.Name = "labelControl5";
+            this.labelControl5.Size = new System.Drawing.Size(280, 13);
+            this.labelControl5.TabIndex = 8;
+            this.labelControl5.Text = "*Note: Default location is the New QCRR Database in U.S.";
+            // 
             // dropDownButton2
             // 
             this.dropDownButton2.AutoSize = true;
             this.dropDownButton2.AutoWidthInLayoutControl = true;
-            this.dropDownButton2.Location = new System.Drawing.Point(141, 86);
+            this.dropDownButton2.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
+            this.dropDownButton2.DropDownControl = this.popupMenu2;
+            this.dropDownButton2.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.dropDownButton2.Location = new System.Drawing.Point(140, 117);
             this.dropDownButton2.Name = "dropDownButton2";
-            this.dropDownButton2.Size = new System.Drawing.Size(122, 22);
+            this.dropDownButton2.Size = new System.Drawing.Size(124, 22);
             this.dropDownButton2.TabIndex = 1;
             this.dropDownButton2.Text = "Destination Location";
+            this.dropDownButton2.Visible = false;
             this.dropDownButton2.Click += new System.EventHandler(this.dropDownButton2_Click);
+            // 
+            // popupMenu2
+            // 
+            this.popupMenu2.Manager = this.barManager1;
+            this.popupMenu2.Name = "popupMenu2";
+            // 
+            // barManager1
+            // 
+            this.barManager1.DockControls.Add(this.barDockControlTop);
+            this.barManager1.DockControls.Add(this.barDockControlBottom);
+            this.barManager1.DockControls.Add(this.barDockControlLeft);
+            this.barManager1.DockControls.Add(this.barDockControlRight);
+            this.barManager1.Form = this;
+            this.barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
+            this.barEditItem1});
+            this.barManager1.MaxItemId = 2;
+            this.barManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemTextEdit1,
+            this.repositoryItemTextEdit2,
+            this.repositoryItemDateEdit1});
+            // 
+            // barEditItem1
+            // 
+            this.barEditItem1.Caption = "barEditItem1";
+            this.barEditItem1.Edit = this.repositoryItemDateEdit1;
+            this.barEditItem1.EditWidth = 91;
+            this.barEditItem1.Id = 1;
+            this.barEditItem1.Name = "barEditItem1";
+            // 
+            // repositoryItemDateEdit1
+            // 
+            this.repositoryItemDateEdit1.AutoHeight = false;
+            this.repositoryItemDateEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemDateEdit1.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemDateEdit1.CalendarView = DevExpress.XtraEditors.Repository.CalendarView.Classic;
+            this.repositoryItemDateEdit1.Name = "repositoryItemDateEdit1";
+            this.repositoryItemDateEdit1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.repositoryItemDateEdit1.VistaDisplayMode = DevExpress.Utils.DefaultBoolean.False;
+            // 
+            // barDockControlTop
+            // 
+            this.barDockControlTop.CausesValidation = false;
+            this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
+            this.barDockControlTop.Size = new System.Drawing.Size(871, 0);
+            // 
+            // barDockControlBottom
+            // 
+            this.barDockControlBottom.CausesValidation = false;
+            this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 525);
+            this.barDockControlBottom.Size = new System.Drawing.Size(871, 0);
+            // 
+            // barDockControlLeft
+            // 
+            this.barDockControlLeft.CausesValidation = false;
+            this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 0);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 525);
+            // 
+            // barDockControlRight
+            // 
+            this.barDockControlRight.CausesValidation = false;
+            this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.barDockControlRight.Location = new System.Drawing.Point(871, 0);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 525);
+            // 
+            // repositoryItemTextEdit1
+            // 
+            this.repositoryItemTextEdit1.AutoHeight = false;
+            this.repositoryItemTextEdit1.Name = "repositoryItemTextEdit1";
+            // 
+            // repositoryItemTextEdit2
+            // 
+            this.repositoryItemTextEdit2.AutoHeight = false;
+            this.repositoryItemTextEdit2.Name = "repositoryItemTextEdit2";
             // 
             // simpleButton2
             // 
-            this.simpleButton2.Location = new System.Drawing.Point(128, 0);
+            this.simpleButton2.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
+            this.simpleButton2.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton2.Image")));
+            this.simpleButton2.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.simpleButton2.Location = new System.Drawing.Point(164, 10);
             this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(135, 28);
+            this.simpleButton2.Size = new System.Drawing.Size(135, 36);
             this.simpleButton2.TabIndex = 7;
             this.simpleButton2.Text = "Reinsert Last App.";
             this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
@@ -232,19 +355,29 @@
             this.dropDownButton1.AutoSize = true;
             this.dropDownButton1.AutoWidthInLayoutControl = true;
             this.dropDownButton1.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
+            this.dropDownButton1.DropDownControl = this.popupMenu1;
             this.dropDownButton1.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.dropDownButton1.Location = new System.Drawing.Point(5, 86);
+            this.dropDownButton1.Location = new System.Drawing.Point(4, 117);
             this.dropDownButton1.Name = "dropDownButton1";
             this.dropDownButton1.Size = new System.Drawing.Size(113, 22);
             this.dropDownButton1.TabIndex = 0;
             this.dropDownButton1.Text = "Location Selection\r\n";
+            this.dropDownButton1.Visible = false;
             this.dropDownButton1.Click += new System.EventHandler(this.dropDownButton1_Click);
+            // 
+            // popupMenu1
+            // 
+            this.popupMenu1.Manager = this.barManager1;
+            this.popupMenu1.Name = "popupMenu1";
             // 
             // simpleButton1
             // 
-            this.simpleButton1.Location = new System.Drawing.Point(9, 0);
+            this.simpleButton1.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
+            this.simpleButton1.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.Image")));
+            this.simpleButton1.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.simpleButton1.Location = new System.Drawing.Point(8, 10);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(115, 28);
+            this.simpleButton1.Size = new System.Drawing.Size(133, 36);
             this.simpleButton1.TabIndex = 6;
             this.simpleButton1.Text = "Insert Application";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
@@ -253,7 +386,7 @@
             // 
             this.checkButton6.AllowAllUnchecked = true;
             this.checkButton6.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
-            this.checkButton6.Location = new System.Drawing.Point(271, 29);
+            this.checkButton6.Location = new System.Drawing.Point(270, 60);
             this.checkButton6.Name = "checkButton6";
             this.checkButton6.Size = new System.Drawing.Size(47, 25);
             this.checkButton6.TabIndex = 5;
@@ -264,7 +397,7 @@
             // 
             this.checkButton5.AllowAllUnchecked = true;
             this.checkButton5.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
-            this.checkButton5.Location = new System.Drawing.Point(218, 29);
+            this.checkButton5.Location = new System.Drawing.Point(217, 60);
             this.checkButton5.Name = "checkButton5";
             this.checkButton5.Size = new System.Drawing.Size(47, 25);
             this.checkButton5.TabIndex = 4;
@@ -275,7 +408,7 @@
             // 
             this.checkButton4.AllowAllUnchecked = true;
             this.checkButton4.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
-            this.checkButton4.Location = new System.Drawing.Point(165, 29);
+            this.checkButton4.Location = new System.Drawing.Point(164, 60);
             this.checkButton4.Name = "checkButton4";
             this.checkButton4.Size = new System.Drawing.Size(47, 25);
             this.checkButton4.TabIndex = 3;
@@ -286,7 +419,7 @@
             // 
             this.checkButton3.AllowAllUnchecked = true;
             this.checkButton3.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
-            this.checkButton3.Location = new System.Drawing.Point(112, 29);
+            this.checkButton3.Location = new System.Drawing.Point(111, 60);
             this.checkButton3.Name = "checkButton3";
             this.checkButton3.Size = new System.Drawing.Size(47, 25);
             this.checkButton3.TabIndex = 2;
@@ -299,7 +432,7 @@
             this.checkButton2.Appearance.Options.UseBackColor = true;
             this.checkButton2.Appearance.Options.UseForeColor = true;
             this.checkButton2.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
-            this.checkButton2.Location = new System.Drawing.Point(59, 29);
+            this.checkButton2.Location = new System.Drawing.Point(58, 60);
             this.checkButton2.Name = "checkButton2";
             this.checkButton2.Size = new System.Drawing.Size(47, 25);
             this.checkButton2.TabIndex = 1;
@@ -312,7 +445,8 @@
             this.checkButton1.Appearance.ForeColor = System.Drawing.Color.Black;
             this.checkButton1.Appearance.Options.UseForeColor = true;
             this.checkButton1.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
-            this.checkButton1.Location = new System.Drawing.Point(6, 29);
+            this.checkButton1.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.checkButton1.Location = new System.Drawing.Point(5, 60);
             this.checkButton1.Name = "checkButton1";
             this.checkButton1.Size = new System.Drawing.Size(47, 25);
             this.checkButton1.TabIndex = 0;
@@ -339,7 +473,6 @@
             this.gridControl2.TabIndex = 0;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView3});
-            this.gridControl2.Click += new System.EventHandler(this.gridControl2_Click);
             // 
             // gridView3
             // 
@@ -421,17 +554,71 @@
             // 
             // panelControl4
             // 
+            this.panelControl4.Controls.Add(this.labelControl7);
+            this.panelControl4.Controls.Add(this.txtFileVerDeleete);
+            this.panelControl4.Controls.Add(this.labelControl6);
+            this.panelControl4.Controls.Add(this.txtAppdelete);
+            this.panelControl4.Controls.Add(this.simpleButton4);
             this.panelControl4.Controls.Add(this.simpleButton3);
             this.panelControl4.Location = new System.Drawing.Point(446, 48);
             this.panelControl4.Name = "panelControl4";
             this.panelControl4.Size = new System.Drawing.Size(413, 182);
             this.panelControl4.TabIndex = 6;
             // 
+            // labelControl7
+            // 
+            this.labelControl7.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Horizontal;
+            this.labelControl7.LineVisible = true;
+            this.labelControl7.Location = new System.Drawing.Point(295, 33);
+            this.labelControl7.Name = "labelControl7";
+            this.labelControl7.Size = new System.Drawing.Size(54, 13);
+            this.labelControl7.TabIndex = 12;
+            this.labelControl7.Text = "File Version";
+            // 
+            // txtFileVerDeleete
+            // 
+            this.txtFileVerDeleete.Location = new System.Drawing.Point(278, 52);
+            this.txtFileVerDeleete.Name = "txtFileVerDeleete";
+            this.txtFileVerDeleete.Size = new System.Drawing.Size(127, 20);
+            this.txtFileVerDeleete.TabIndex = 11;
+            // 
+            // labelControl6
+            // 
+            this.labelControl6.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Horizontal;
+            this.labelControl6.LineVisible = true;
+            this.labelControl6.Location = new System.Drawing.Point(162, 34);
+            this.labelControl6.Name = "labelControl6";
+            this.labelControl6.Size = new System.Drawing.Size(82, 13);
+            this.labelControl6.TabIndex = 10;
+            this.labelControl6.Text = "Application Name";
+            // 
+            // txtAppdelete
+            // 
+            this.txtAppdelete.Location = new System.Drawing.Point(145, 53);
+            this.txtAppdelete.Name = "txtAppdelete";
+            this.txtAppdelete.Size = new System.Drawing.Size(127, 20);
+            this.txtAppdelete.TabIndex = 9;
+            // 
+            // simpleButton4
+            // 
+            this.simpleButton4.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
+            this.simpleButton4.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton4.Image")));
+            this.simpleButton4.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.simpleButton4.Location = new System.Drawing.Point(7, 48);
+            this.simpleButton4.Name = "simpleButton4";
+            this.simpleButton4.Size = new System.Drawing.Size(132, 28);
+            this.simpleButton4.TabIndex = 8;
+            this.simpleButton4.Text = "Delete Selected";
+            this.simpleButton4.Click += new System.EventHandler(this.simpleButton4_Click);
+            // 
             // simpleButton3
             // 
+            this.simpleButton3.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
+            this.simpleButton3.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton3.Image")));
+            this.simpleButton3.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.simpleButton3.Location = new System.Drawing.Point(7, 0);
             this.simpleButton3.Name = "simpleButton3";
-            this.simpleButton3.Size = new System.Drawing.Size(115, 28);
+            this.simpleButton3.Size = new System.Drawing.Size(132, 28);
             this.simpleButton3.TabIndex = 7;
             this.simpleButton3.Text = "Refresh DB Views";
             this.simpleButton3.Click += new System.EventHandler(this.simpleButton3_Click);
@@ -463,6 +650,10 @@
             this.Controls.Add(this.panelControl3);
             this.Controls.Add(this.panelControl2);
             this.Controls.Add(this.panelControl1);
+            this.Controls.Add(this.barDockControlLeft);
+            this.Controls.Add(this.barDockControlRight);
+            this.Controls.Add(this.barDockControlBottom);
+            this.Controls.Add(this.barDockControlTop);
             this.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ETravUpdater.Properties.Settings.Default, "USA", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -474,6 +665,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             this.panelControl1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenu2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).EndInit();
@@ -482,6 +680,9 @@
             this.panelControl3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).EndInit();
             this.panelControl4.ResumeLayout(false);
+            this.panelControl4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFileVerDeleete.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAppdelete.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -524,6 +725,23 @@
         private DevExpress.XtraEditors.LabelControl labelControl4;
         private DevExpress.XtraEditors.SimpleButton simpleButton3;
         private System.Windows.Forms.Timer timer1;
+        private DevExpress.XtraEditors.LabelControl labelControl5;
+        private DevExpress.XtraEditors.SimpleButton simpleButton4;
+        private DevExpress.XtraEditors.LabelControl labelControl7;
+        private DevExpress.XtraEditors.TextEdit txtFileVerDeleete;
+        private DevExpress.XtraEditors.LabelControl labelControl6;
+        private DevExpress.XtraEditors.TextEdit txtAppdelete;
+        private DevExpress.XtraBars.PopupMenu popupMenu2;
+        private DevExpress.XtraBars.BarManager barManager1;
+        private DevExpress.XtraBars.BarDockControl barDockControlTop;
+        private DevExpress.XtraBars.BarDockControl barDockControlBottom;
+        private DevExpress.XtraBars.BarDockControl barDockControlLeft;
+        private DevExpress.XtraBars.BarDockControl barDockControlRight;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit2;
+        private DevExpress.XtraBars.PopupMenu popupMenu1;
+        private DevExpress.XtraBars.BarEditItem barEditItem1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemDateEdit repositoryItemDateEdit1;
     }
 }
 
