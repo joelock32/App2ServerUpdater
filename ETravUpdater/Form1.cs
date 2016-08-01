@@ -533,7 +533,7 @@ namespace ETravUpdater
             databaseFileupdate(xfile, version);
         }
 
-        private void simpleButton4_Click(object sender, EventArgs e)
+        private void simpleButton4_Click(object sender, EventArgs e) //fix gridselection code.
         {
             if (txtAppdelete.Text == "")
             {
