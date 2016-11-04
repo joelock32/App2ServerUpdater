@@ -61,10 +61,8 @@
             this.repositoryItemTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.repositoryItemTextEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
-            this.dropDownButton2 = new DevExpress.XtraEditors.DropDownButton();
             this.popupMenu2 = new DevExpress.XtraBars.PopupMenu(this.components);
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
-            this.dropDownButton1 = new DevExpress.XtraEditors.DropDownButton();
             this.popupMenu1 = new DevExpress.XtraBars.PopupMenu(this.components);
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.checkButton6 = new DevExpress.XtraEditors.CheckButton();
@@ -100,6 +98,8 @@
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.checkButton7 = new DevExpress.XtraEditors.CheckButton();
+            this.lblAppVersion = new DevExpress.XtraEditors.HyperlinkLabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -229,11 +229,10 @@
             // 
             // panelControl1
             // 
+            this.panelControl1.Controls.Add(this.checkButton7);
             this.panelControl1.Controls.Add(this.progressBarControl1);
             this.panelControl1.Controls.Add(this.labelControl5);
-            this.panelControl1.Controls.Add(this.dropDownButton2);
             this.panelControl1.Controls.Add(this.simpleButton2);
-            this.panelControl1.Controls.Add(this.dropDownButton1);
             this.panelControl1.Controls.Add(this.simpleButton1);
             this.panelControl1.Controls.Add(this.checkButton6);
             this.panelControl1.Controls.Add(this.checkButton5);
@@ -339,21 +338,6 @@
             this.labelControl5.TabIndex = 8;
             this.labelControl5.Text = "*Note: Default location is the New QCRR Database in U.S.";
             // 
-            // dropDownButton2
-            // 
-            this.dropDownButton2.AutoSize = true;
-            this.dropDownButton2.AutoWidthInLayoutControl = true;
-            this.dropDownButton2.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
-            this.dropDownButton2.DropDownControl = this.popupMenu2;
-            this.dropDownButton2.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.dropDownButton2.Location = new System.Drawing.Point(140, 117);
-            this.dropDownButton2.Name = "dropDownButton2";
-            this.dropDownButton2.Size = new System.Drawing.Size(124, 22);
-            this.dropDownButton2.TabIndex = 1;
-            this.dropDownButton2.Text = "Destination Location";
-            this.dropDownButton2.Visible = false;
-            this.dropDownButton2.Click += new System.EventHandler(this.dropDownButton2_Click);
-            // 
             // popupMenu2
             // 
             this.popupMenu2.Manager = this.barManager1;
@@ -370,21 +354,6 @@
             this.simpleButton2.TabIndex = 7;
             this.simpleButton2.Text = "Reinsert Last App.";
             this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
-            // 
-            // dropDownButton1
-            // 
-            this.dropDownButton1.AutoSize = true;
-            this.dropDownButton1.AutoWidthInLayoutControl = true;
-            this.dropDownButton1.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
-            this.dropDownButton1.DropDownControl = this.popupMenu1;
-            this.dropDownButton1.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.dropDownButton1.Location = new System.Drawing.Point(4, 117);
-            this.dropDownButton1.Name = "dropDownButton1";
-            this.dropDownButton1.Size = new System.Drawing.Size(113, 22);
-            this.dropDownButton1.TabIndex = 0;
-            this.dropDownButton1.Text = "Location Selection\r\n";
-            this.dropDownButton1.Visible = false;
-            this.dropDownButton1.Click += new System.EventHandler(this.dropDownButton1_Click);
             // 
             // popupMenu1
             // 
@@ -477,10 +446,11 @@
             // panelControl2
             // 
             this.panelControl2.AutoSize = true;
+            this.panelControl2.Controls.Add(this.lblAppVersion);
             this.panelControl2.Controls.Add(this.gridControl2);
             this.panelControl2.Location = new System.Drawing.Point(446, 260);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(422, 259);
+            this.panelControl2.Size = new System.Drawing.Size(422, 268);
             this.panelControl2.TabIndex = 1;
             // 
             // gridControl2
@@ -494,6 +464,7 @@
             this.gridControl2.TabIndex = 0;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView3});
+            this.gridControl2.Click += new System.EventHandler(this.gridControl2_Click);
             // 
             // gridView3
             // 
@@ -720,6 +691,31 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // checkButton7
+            // 
+            this.checkButton7.AllowAllUnchecked = true;
+            this.checkButton7.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkButton7.Appearance.ForeColor = System.Drawing.Color.Blue;
+            this.checkButton7.Appearance.Options.UseFont = true;
+            this.checkButton7.Appearance.Options.UseForeColor = true;
+            this.checkButton7.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
+            this.checkButton7.Location = new System.Drawing.Point(9, 123);
+            this.checkButton7.Name = "checkButton7";
+            this.checkButton7.Size = new System.Drawing.Size(104, 23);
+            this.checkButton7.TabIndex = 10;
+            this.checkButton7.Text = "USA LOCATION";
+            this.checkButton7.ToolTip = "Click to change location to China Database";
+            this.checkButton7.CheckedChanged += new System.EventHandler(this.checkButton7_CheckedChanged);
+            // 
+            // lblAppVersion
+            // 
+            this.lblAppVersion.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblAppVersion.Location = new System.Drawing.Point(170, 248);
+            this.lblAppVersion.Name = "lblAppVersion";
+            this.lblAppVersion.Size = new System.Drawing.Size(109, 13);
+            this.lblAppVersion.TabIndex = 1;
+            this.lblAppVersion.Text = "hyperlinkLabelControl2";
+            // 
             // Form1
             // 
             this.Appearance.Options.UseFont = true;
@@ -759,6 +755,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
+            this.panelControl2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
@@ -787,8 +784,6 @@
         private DevExpress.XtraEditors.CheckButton checkButton2;
         private DevExpress.XtraEditors.CheckButton checkButton1;
         private DevExpress.XtraEditors.PanelControl panelControl2;
-        private DevExpress.XtraEditors.DropDownButton dropDownButton2;
-        private DevExpress.XtraEditors.DropDownButton dropDownButton1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private DevExpress.XtraEditors.PanelControl panelControl3;
         private DevExpress.XtraGrid.GridControl gridControl1;
@@ -836,6 +831,8 @@
         private DevExpress.XtraEditors.LabelControl labelControl9;
         private DevExpress.XtraEditors.TextEdit txtAppMoveN;
         private DevExpress.XtraEditors.SimpleButton simpleButton5;
+        private DevExpress.XtraEditors.CheckButton checkButton7;
+        private DevExpress.XtraEditors.HyperlinkLabelControl lblAppVersion;
     }
 }
 
