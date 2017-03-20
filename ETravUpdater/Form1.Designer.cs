@@ -50,6 +50,7 @@
             this.colApplicationID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colVersion = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.checkButton7 = new DevExpress.XtraEditors.CheckButton();
             this.progressBarControl1 = new DevExpress.XtraEditors.ProgressBarControl();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
@@ -61,9 +62,7 @@
             this.repositoryItemTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.repositoryItemTextEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
-            this.popupMenu2 = new DevExpress.XtraBars.PopupMenu(this.components);
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
-            this.popupMenu1 = new DevExpress.XtraBars.PopupMenu(this.components);
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.checkButton6 = new DevExpress.XtraEditors.CheckButton();
             this.checkButton5 = new DevExpress.XtraEditors.CheckButton();
@@ -71,7 +70,10 @@
             this.checkButton3 = new DevExpress.XtraEditors.CheckButton();
             this.checkButton2 = new DevExpress.XtraEditors.CheckButton();
             this.checkButton1 = new DevExpress.XtraEditors.CheckButton();
+            this.popupMenu2 = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.popupMenu1 = new DevExpress.XtraBars.PopupMenu(this.components);
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            this.lblAppVersion = new DevExpress.XtraEditors.HyperlinkLabelControl();
             this.gridControl2 = new DevExpress.XtraGrid.GridControl();
             this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colApplicationname1 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -98,8 +100,6 @@
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.checkButton7 = new DevExpress.XtraEditors.CheckButton();
-            this.lblAppVersion = new DevExpress.XtraEditors.HyperlinkLabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -245,6 +245,22 @@
             this.panelControl1.Size = new System.Drawing.Size(428, 183);
             this.panelControl1.TabIndex = 0;
             // 
+            // checkButton7
+            // 
+            this.checkButton7.AllowAllUnchecked = true;
+            this.checkButton7.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkButton7.Appearance.ForeColor = System.Drawing.Color.Blue;
+            this.checkButton7.Appearance.Options.UseFont = true;
+            this.checkButton7.Appearance.Options.UseForeColor = true;
+            this.checkButton7.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
+            this.checkButton7.Location = new System.Drawing.Point(9, 123);
+            this.checkButton7.Name = "checkButton7";
+            this.checkButton7.Size = new System.Drawing.Size(104, 23);
+            this.checkButton7.TabIndex = 10;
+            this.checkButton7.Text = "USA LOCATION";
+            this.checkButton7.ToolTip = "Click to change location to China Database";
+            this.checkButton7.CheckedChanged += new System.EventHandler(this.checkButton7_CheckedChanged);
+            // 
             // progressBarControl1
             // 
             this.progressBarControl1.Location = new System.Drawing.Point(0, 159);
@@ -338,11 +354,6 @@
             this.labelControl5.TabIndex = 8;
             this.labelControl5.Text = "*Note: Default location is the New QCRR Database in U.S.";
             // 
-            // popupMenu2
-            // 
-            this.popupMenu2.Manager = this.barManager1;
-            this.popupMenu2.Name = "popupMenu2";
-            // 
             // simpleButton2
             // 
             this.simpleButton2.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
@@ -354,11 +365,6 @@
             this.simpleButton2.TabIndex = 7;
             this.simpleButton2.Text = "Reinsert Last App.";
             this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
-            // 
-            // popupMenu1
-            // 
-            this.popupMenu1.Manager = this.barManager1;
-            this.popupMenu1.Name = "popupMenu1";
             // 
             // simpleButton1
             // 
@@ -413,7 +419,7 @@
             this.checkButton3.Name = "checkButton3";
             this.checkButton3.Size = new System.Drawing.Size(47, 25);
             this.checkButton3.TabIndex = 2;
-            this.checkButton3.Text = "*.FRF";
+            this.checkButton3.Text = "*.FRX";
             this.checkButton3.CheckedChanged += new System.EventHandler(this.checkButton3_CheckedChanged);
             // 
             // checkButton2
@@ -443,6 +449,16 @@
             this.checkButton1.Text = "*.EXE";
             this.checkButton1.CheckedChanged += new System.EventHandler(this.checkButton1_CheckedChanged);
             // 
+            // popupMenu2
+            // 
+            this.popupMenu2.Manager = this.barManager1;
+            this.popupMenu2.Name = "popupMenu2";
+            // 
+            // popupMenu1
+            // 
+            this.popupMenu1.Manager = this.barManager1;
+            this.popupMenu1.Name = "popupMenu1";
+            // 
             // panelControl2
             // 
             this.panelControl2.AutoSize = true;
@@ -452,6 +468,15 @@
             this.panelControl2.Name = "panelControl2";
             this.panelControl2.Size = new System.Drawing.Size(422, 268);
             this.panelControl2.TabIndex = 1;
+            // 
+            // lblAppVersion
+            // 
+            this.lblAppVersion.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblAppVersion.Location = new System.Drawing.Point(170, 248);
+            this.lblAppVersion.Name = "lblAppVersion";
+            this.lblAppVersion.Size = new System.Drawing.Size(109, 13);
+            this.lblAppVersion.TabIndex = 1;
+            this.lblAppVersion.Text = "hyperlinkLabelControl2";
             // 
             // gridControl2
             // 
@@ -690,31 +715,6 @@
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // checkButton7
-            // 
-            this.checkButton7.AllowAllUnchecked = true;
-            this.checkButton7.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkButton7.Appearance.ForeColor = System.Drawing.Color.Blue;
-            this.checkButton7.Appearance.Options.UseFont = true;
-            this.checkButton7.Appearance.Options.UseForeColor = true;
-            this.checkButton7.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
-            this.checkButton7.Location = new System.Drawing.Point(9, 123);
-            this.checkButton7.Name = "checkButton7";
-            this.checkButton7.Size = new System.Drawing.Size(104, 23);
-            this.checkButton7.TabIndex = 10;
-            this.checkButton7.Text = "USA LOCATION";
-            this.checkButton7.ToolTip = "Click to change location to China Database";
-            this.checkButton7.CheckedChanged += new System.EventHandler(this.checkButton7_CheckedChanged);
-            // 
-            // lblAppVersion
-            // 
-            this.lblAppVersion.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblAppVersion.Location = new System.Drawing.Point(170, 248);
-            this.lblAppVersion.Name = "lblAppVersion";
-            this.lblAppVersion.Size = new System.Drawing.Size(109, 13);
-            this.lblAppVersion.TabIndex = 1;
-            this.lblAppVersion.Text = "hyperlinkLabelControl2";
             // 
             // Form1
             // 
